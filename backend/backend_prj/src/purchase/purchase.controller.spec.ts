@@ -8,7 +8,9 @@ describe('PurchaseController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PurchaseController],
-      providers: [PurchaseService],
+      providers: [
+        {provide:PurchaseService,useValue:vitest.fn()}
+      ],
     }).compile();
 
     controller = module.get<PurchaseController>(PurchaseController);
