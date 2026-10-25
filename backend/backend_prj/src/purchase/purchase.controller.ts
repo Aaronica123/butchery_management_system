@@ -8,6 +8,6 @@ export class PurchaseController {
 
   @Post("/create")
   create(@Body() bd: PurchaseDto){
-    this.purchaseService.create(bd);
+    return this.purchaseService.create(bd);
   }
 }
