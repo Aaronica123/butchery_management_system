@@ -2,18 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient,SupabaseClient } from '@supabase/supabase-js';
 import { PurchaseDto } from './obj/purchase.dto/purchase.dto.js';
+import { DbServiceTs } from '../db.service.ts/db.service.ts.js';
 @Injectable()
 export class PurchaseService {
-    private client: SupabaseClient;
-    constructor(config: ConfigService){
-        this.client=createClient(
-            config.getOrThrow("URL"),
-            config.getOrThrow("KEY")
-        )
+    
+    constructor(private readonly db: DbServiceTs){
+        
     }
 
     async create(bd: PurchaseDto){
-        const {data,error}=await this.client.schema("butchery_schema").from("purchase").insert({
+        const {data,error}=await this.db.client.schema("butchery_schema").from("purchase").insert({
             first_name:bd.first_name,
             last_name:bd.last_name,
             meat:bd.meat,

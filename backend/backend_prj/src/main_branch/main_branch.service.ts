@@ -3,18 +3,13 @@ import { ConfigService } from '@nestjs/config';
 import { createClient,SupabaseClient } from '@supabase/supabase-js';
 import { MainBranchDto } from './obj/main_branch.dto/main_branch.dto.js';
 import { ConflictException } from '@nestjs/common';
+import { DbServiceTs } from '../db.service.ts/db.service.ts.js';
 @Injectable()
 export class MainBranchService {
-     client: SupabaseClient;
-    constructor(config: ConfigService){
-        this.client=createClient(
-            config.getOrThrow("URL"),
-            config.getOrThrow("KEY")
-        )
-    }
-
+    constructor(private readonly db:DbServiceTs){}
     async create(bd: MainBranchDto){
-        const {data,error}=await this.client.schema("butchery_schema").from("main_branch").insert({
+        
+        const {data,error}=await this.db.client.schema("butchery_schema").from("main_branch").insert({
             meat:bd.meat,
             wasted: bd.wasted,
             received:bd.received,
