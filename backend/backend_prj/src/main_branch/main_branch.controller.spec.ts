@@ -10,7 +10,11 @@ describe('MainBranchController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [MainBranchController],
-      providers: [MainBranchService]
+      providers: [
+        
+        {provide:MainBranchService,useValue:vitest.fn()}
+          
+      ]
       ,
       
     }).compile();
