@@ -36,6 +36,40 @@ closing int default 0,
 opening int default 0,
 created date default current_date
 );
+
+create table butchery_schema.expenses(
+id serial primary key,
+rent int default 0,
+wages int default 0,
+electricity int default 0,
+transport int default 0,
+gas int default 0,
+packaging int default 0,
+water int default 0,
+total int default 0,
+created date default current_date 
+);
+alter table butchery_schema.expenses add constraint expense_uq unique(created);
+
+create or replace function butchery_schema.expense_insert()
+returns trigger as $$
+BEGIN
+	new.total:=new.rent +new.wages + new.electricity +new.transport +new.gas +new.packaging+new.water;
+	return new;
+END;
+$$
+LANGUAGE plpgsql;
+
+create or replace trigger expense_insert
+before insert on butchery_schema.expenses
+for each row
+execute function butchery_schema.expense_insert();
+
+create or replace trigger expense_update
+before update on butchery_schema.expenses
+for each row 
+execute function butchery_schema.expense_insert();
+
 alter table butchery_schema.main_branch add constraint uq unique(meat, created);
 
 alter table butchery_schema.purchase add constraint purchase_fk 
