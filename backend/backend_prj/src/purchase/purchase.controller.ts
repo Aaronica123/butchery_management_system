@@ -4,7 +4,7 @@ import { PurchaseDto } from './obj/purchase.dto/purchase.dto.js';
 import { Post } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuardTs } from '../guards/auth.guard.ts/auth.guard.ts.js';
-@Controller('purchase')
+@Controller('api/purchase')
 export class PurchaseController {
   constructor(private readonly purchaseService: PurchaseService) {}
   @UseGuards(AuthGuardTs)
