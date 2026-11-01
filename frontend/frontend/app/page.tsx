@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {val} from "@/components/supabase";
+import Link from "next/link";
 export default function Home() {
   const [value,setvalue]=useState({email:"",password:""});
   const change=(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -23,12 +24,13 @@ export default function Home() {
   }
   return (
   <>
-  <h1>Hello, this is my home page</h1>;
+  <h1>Login Page</h1>
   <label>Email</label>
   <input value={value.email} onChange={change} name="email" required type="email" placeholder="enter email"></input>
   <label>Password</label>
   <input value={value.password} onChange={change} name="password" required type="password" placeholder="enter password"></input>
   <button type="button" onClick={submit}>Login</button>
+  <Link href={"/pages/forms"}>Nav</Link>
   </>
   )
 
