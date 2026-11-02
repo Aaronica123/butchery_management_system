@@ -9,7 +9,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
     const[act,setact]=useState(false)
     const route=useRouter()
     const logout=async()=>{
-        const{data,error}=await val.auth.signOut({scope:"local"});
+        const{error}=await val.auth.signOut({scope:"local"});
         if(error){
             alert("error encountered logout failed")
             throw new Error("Could not log out")
