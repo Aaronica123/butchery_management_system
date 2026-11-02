@@ -24,4 +24,12 @@ export class PurchaseService {
         }
         return data;
     }
+
+    async fetch(){
+        const{data,error}=await this.db.client.schema("butchery_schema").from("supplier").select("*");
+        if(error){
+            throw new Error(error.message);
+        }
+        return data;
+    }
 }
