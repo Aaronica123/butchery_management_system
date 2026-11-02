@@ -1,4 +1,4 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { PurchaseService } from './purchase.service.js';
 import { PurchaseDto } from './obj/purchase.dto/purchase.dto.js';
 import { Post } from '@nestjs/common';
@@ -11,5 +11,10 @@ export class PurchaseController {
   @Post("/create")
   create(@Body() bd: PurchaseDto){
     return this.purchaseService.create(bd);
+  }
+
+  @Get("/fetch")
+  fetch(){
+   return this.purchaseService.fetch();
   }
 }
