@@ -3,7 +3,7 @@ import { AppModule } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const cors_config={
-  origin:"http://localhost:8018",
+  origin:["http://localhost:8018","http://localhost:3000"],
   methods:["GET","POST","PUT"],
   allowedHeaders:["Authorization","Content-Type"],
   credentials:true
