@@ -6,7 +6,7 @@ export default function Submit(){
     const [form,setform]=useState({first_name:"",last_name:"",quantity:0,meat:""})
     const [val,setvalue]=useState([]);
     const[ar,setar]=useState({first_name:"",last_name:"",full_name:"",meat:"",amount:0})
-    const arr_change=(e)=>{
+    const arr_change=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         const{name,value}=e.target;
         console.log(typeof(value))
         console.log(value)
@@ -14,7 +14,7 @@ export default function Submit(){
         if(name=="full_name"){
         setar((data)=>({
             ...data,
-            [name]:val[Number(value)][1]+val[Number(value)][2]
+            [name]:String(val[Number(value)][1])+String(val[Number(value)][2])
         }))
         setar((data)=>({
             ...data,
@@ -77,14 +77,11 @@ export default function Submit(){
         <select onChange={arr_change} name="full_name">
             <option value={""}>Choose option</option>
         {val.map((data:[number,"","","",number],key:number)=>(
-            
             <option value={key} key={key}>
                 {data.map((d,k)=>(
                     k==1||k==2?<span key={k}>{d}</span>:""
                 ))}
             </option>
-            
-            
         ))}
         </select>
         <select onChange={arr_change} name="meat">
