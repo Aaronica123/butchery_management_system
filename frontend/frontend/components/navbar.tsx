@@ -36,11 +36,14 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             
             <MoveLeftIcon color="blue" size={"30"} onClick={()=>setact(false)}></MoveLeftIcon>
             </div>
-            <div style={{width:"100%",height:"100%",display:"flex",padding:"5px"}}>
+            <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={()=>route.push('/pages/forms')} style={{height:"fit-content"}}>Create Purchase</button>
             </div>
-            <div style={{width:"100%",height:"100%",display:"flex",padding:"5px"}}>
+            <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={()=>route.push('/pages/forms/stock')} style={{height:"fit-content"}}>Create Stock</button>
+            </div>
+            <div style={{width:"100%",height:"100%",display:"flex",padding:"5px"}}>
+                <button onClick={()=>route.push('/pages/forms/stock/fetch')} style={{height:"fit-content"}}>Fetch Stock</button>
             </div>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={logout} type="button">Logout</button>
