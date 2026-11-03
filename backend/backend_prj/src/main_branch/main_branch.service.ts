@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { createClient,SupabaseClient } from '@supabase/supabase-js';
 import { MainBranchDto } from './obj/main_branch.dto/main_branch.dto.js';
 import { ConflictException } from '@nestjs/common';
 import { DbServiceTs } from '../db.service.ts/db.service.ts.js';
@@ -23,5 +21,12 @@ export class MainBranchService {
         }
         return data;
 
+    }
+    async fetch(){
+        const{data,error}=await this.db.client.schema("butchery_schema").from("main_branch").select("*");
+        if(error){
+            throw new Error(error.message)
+        }
+        return data;
     }
 }
