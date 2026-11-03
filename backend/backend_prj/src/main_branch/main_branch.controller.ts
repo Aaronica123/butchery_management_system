@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post,Get } from '@nestjs/common';
 import { MainBranchService } from './main_branch.service.js';
 import { MainBranchDto } from './obj/main_branch.dto/main_branch.dto.js';
 
@@ -8,5 +8,10 @@ export class MainBranchController {
   @Post("/create")
   create(@Body() bd:MainBranchDto){
    return this.mainBranchService.create(bd)
+  }
+
+  @Get("/fetch")
+  fetch(){
+    return this.mainBranchService.fetch();
   }
 }
