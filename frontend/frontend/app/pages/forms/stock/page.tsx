@@ -11,7 +11,7 @@ export default function Stock_form(){
             [name]:value
         }))
     }
-    const meat_change=(e)=>{
+    const meat_change=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         const{name,value}=e.target;
         setmeat((data)=>({
             ...data,
