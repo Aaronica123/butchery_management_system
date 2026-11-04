@@ -6,7 +6,7 @@ export class ExpensesService {
     constructor(private readonly client:DbServiceTs){}
 
     async update(bd:ExpenseDto){
-        const{data,error}=await this.client.client.schema("butchery_schema").from("expenses").update({
+        const{data,error}=await this.client.client.schema("butchery_schema").from("expenses").insert({
         electricity:bd.electricity,
         water:bd.water,
         wages:bd.wages,
@@ -22,6 +22,14 @@ export class ExpensesService {
         }
         if(error){
             throw new Error(error?.message);
+        }
+        return data;
+    }
+
+    async fetch(){
+        const {data,error}=await this.client.client.schema("butchery_schema").from("expenses").select("*");
+        if(error){
+            throw new Error(error.message)
         }
         return data;
     }

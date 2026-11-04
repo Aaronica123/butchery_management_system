@@ -5,7 +5,7 @@ import { NotFoundException } from '@nestjs/common';
 describe('ExpensesService', () => {
   let service: ExpensesService;
   const client={
-    update:vitest.fn().mockReturnThis(),
+    insert:vitest.fn().mockReturnThis(),
     schema:vitest.fn().mockReturnThis(),
     from:vitest.fn().mockReturnThis(),
     eq:vitest.fn().mockReturnThis(),
