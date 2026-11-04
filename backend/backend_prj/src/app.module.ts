@@ -5,8 +5,9 @@ import { PurchaseModule } from './purchase/purchase.module.js';
 import { ConfigModule } from '@nestjs/config';
 import { MainBranchModule } from './main_branch/main_branch.module.js';
 import { ExpensesModule } from './expenses/expenses.module.js';
+import { SalesModule } from './sales/sales.module.js';
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal:true}),PurchaseModule, MainBranchModule, ExpensesModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}),PurchaseModule, MainBranchModule, ExpensesModule, SalesModule],
   controllers: [AppController],
   providers: [AppService],
 })
