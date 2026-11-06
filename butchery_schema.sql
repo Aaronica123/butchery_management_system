@@ -8,7 +8,6 @@ last_name varchar(100),
 meat butchery_schema.meat,
 amount int
 );
-
 alter table butchery_schema.supplier add constraint supplier_uq 
 unique(first_name,last_name,meat);
 create table butchery_schema.purchase(
@@ -36,6 +35,8 @@ closing int default 0,
 opening int default 0,
 created date default current_date
 );
+alter table butchery_schema.main_branch add constraint uq unique(meat, created);
+alter table butchery_schema.main_branch add constraint closing_check check(closing>=0);
 
 create table butchery_schema.expenses(
 id serial primary key,
@@ -47,9 +48,38 @@ gas int default 0,
 packaging int default 0,
 water int default 0,
 total int default 0,
-created date default current_date 
+created date default current_date,
+updated date default null
 );
-alter table butchery_schema.expenses add constraint expense_uq unique(created);
+alter table butchery_schema.expenses add constraint expense_crt unique(created);
+alter table butchery_schema.expenses add constraint expense_upd unique(updated);
+
+create table butchery_schema.sales(
+id serial primary key,
+cash int default 0,
+mpesa int default 0,
+total int default 0,
+created date default current_date
+);
+
+alter table butchery_schema.sales add constraint sales_uq unique(created);
+alter table butchery_schema.sales add constraint cash check(cash>=0);
+alter table butchery_schema.sales add constraint mpesa check(cash>=0);
+
+create or replace function butchery_schema.sales()
+returns trigger as $$
+BEGIN
+new.total:=new.cash+new.mpesa;
+return new;
+END;
+$$
+language plpgsql;
+
+create or replace trigger sales_sum
+before insert on butchery_schema.sales
+for each row
+execute function butchery_schema.sales();
+
 
 create or replace function butchery_schema.expense_insert()
 returns trigger as $$
@@ -70,13 +100,43 @@ before update on butchery_schema.expenses
 for each row 
 execute function butchery_schema.expense_insert();
 
-alter table butchery_schema.main_branch add constraint uq unique(meat, created);
+create or replace function butchery_schema.stock_track()
+returns trigger as $$
+DECLARE
+hold_ numeric;
+BEGIN
+	IF new.opening=0 THEN
+		select b.closing into hold_ from butchery_schema.main_branch b
+		where b.created = (current_date-1) and b.meat = new.meat;
+		if hold_ is null and new.received=0 THEN
+			return null;
+		END IF;
+		IF hold_ is not null THEN
+			new.closing:=hold_+new.received-(new.wasted+new.transfered+new.sold);
+		END IF;
+		IF hold_ is null and new.received>0 then
+			new.closing:=new.received-(new.wasted+new.transfered+new.sold);
+			
+		END IF;
+	END IF;
+	return new;		
+END;
+$$
+LANGUAGE plpgsql;
+
+create or replace trigger stock_tracker
+before insert on butchery_schema.main_branch
+for each row
+execute function butchery_schema.stock_track();
 
 alter table butchery_schema.purchase add constraint purchase_fk 
 foreign key (first_name,last_name,meat) 
 references
 butchery_schema.supplier(first_name,last_name,meat);
-
+insert into butchery_schema.supplier(first_name,last_name,meat,amount)
+values('Vendor','One','beef',102),('Vendor','Two','chicken',122),('Vendor','Three','pork',212);
+insert into butchery_schema.supplier(first_name,last_name,meat,amount)
+values('Vendor','One','goat',232);
 create or replace function butchery_schema.cost_check()
 RETURNS TRIGGER AS $$
 DECLARE 
@@ -114,31 +174,3 @@ before update on butchery_schema.purchase
 FOR EACH ROW
 EXECUTE function butchery_schema.balance();
 
-create or replace function butchery_schema.stock_track()
-returns trigger as $$
-DECLARE
-hold_ numeric;
-BEGIN
-	IF new.opening=0 THEN
-		select b.closing into hold_ from butchery_schema.main_branch b
-		where b.created = (current_date-1) and b.meat = new.meat;
-		if hold_ is null and new.received=0 THEN
-			return null;
-		END IF;
-		IF hold_ is not null THEN
-			new.closing:=hold_+new.received-(new.wasted+new.transfered+new.sold);
-		END IF;
-		IF hold_ is null and new.received>0 then
-			new.closing:=new.received-(new.wasted+new.transfered+new.sold);
-			
-		END IF;
-	END IF;
-	return new;		
-END;
-$$
-LANGUAGE plpgsql;
-
-create or replace trigger stock_tracker
-before insert on butchery_schema.main_branch
-for each row
-execute function butchery_schema.stock_track();
