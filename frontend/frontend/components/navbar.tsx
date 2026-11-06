@@ -48,8 +48,14 @@ export default function Navbar({children}:{children: React.ReactNode;}){
              <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={()=>route.push('/pages/forms/expenses')} style={{height:"fit-content"}}>Create Expense</button>
             </div>
-            <div style={{width:"100%",height:"100%",display:"flex",padding:"5px"}}>
+            <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={()=>route.push('/pages/forms/expenses/fetch')} style={{height:"fit-content"}}>Fetch Expense</button>
+            </div>
+             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
+                <button onClick={()=>route.push('/pages/forms/sales')} style={{height:"fit-content"}}>Create Sales</button>
+            </div>
+             <div style={{width:"100%",height:"100%",display:"flex",padding:"5px"}}>
+                <button onClick={()=>route.push('/pages/forms/sales/fetch')} style={{height:"fit-content"}}>Fetch Sales</button>
             </div>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"5px"}}>
                 <button onClick={logout} type="button">Logout</button>
