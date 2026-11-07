@@ -23,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body style={{ margin:0}}>
-        <Theme style={{background:"#ebebefdc 10%"}}>
+        <Theme style={{background:"#FAF9F6 10%"}}>
         {children}
         </Theme>
         </body>
