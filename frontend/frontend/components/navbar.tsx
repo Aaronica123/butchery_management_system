@@ -1,10 +1,11 @@
 "use client"
-import { LayoutDashboard, MoveLeftIcon } from "lucide-react";
+import { LayoutDashboard, MoveLeftIcon, Sidebar, SidebarOpen } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LayoutDashboardIcon } from "lucide-react";
 import { final_ax } from "./axios";
 import { val } from "./supabase";
+import Head_text from "./text";
 
 export default function Navbar({children}:{children: React.ReactNode;}){
     const[act,setact]=useState(false)
@@ -69,16 +70,19 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                 <button onClick={logout} type="button">Logout</button>
             </div>
             </div>
-            <div style={{display:"flex",alignItems:"center",width:"100%",height:"fit-content",marginLeft:"5px",marginBottom:"-15px",gap:"5px"}}>
-                <div style={{width:"fit-content",padding:"5px",borderRadius:"10px",backgroundColor:"black",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                <LayoutDashboard  color="white" size={"30"} onClick={()=>setact(true)}></LayoutDashboard>
+            <div style={{display:"flex",alignItems:"center",width:"100%",height:"80px",gap:"5px"}}>
+                <div style={{marginLeft:"15px",width:"fit-content",padding:"5px",borderRadius:"10px",backgroundColor:"#dbdbdb",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
+                <SidebarOpen  color="#742C38" size={"30"} onClick={()=>setact(true)}></SidebarOpen>
+                
                 </div>
-                <div style={{display:"flex",width:"100%",justifyContent:"center",alignItems:"center"}}>
-                <h2 >Butchery Management System</h2>
+                <div style={{display:"flex",width:"100%",justifyContent:"right",marginRight:"10px",alignItems:"center"}}>
+                <Head_text>Butchery Management System</Head_text>
                 </div>
             </div>  
-            <div style={{marginLeft:"5px",padding:"5px"}}>
+            <div style={{padding:"5px",borderTop:"1px solid black"}}>
+                <div style={{marginLeft:"15px",}}>
                 {children}
+                </div>
             </div>  
         </div>
         </>
