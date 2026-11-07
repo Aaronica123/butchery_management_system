@@ -14,6 +14,13 @@ export function Child_text({children}:{children: React.ReactNode}){
         </Text>
     )
 }
+export function Child_text1({children}:{children: React.ReactNode}){
+    return(
+        <Text weight={"medium"} size={"3"} style={{fontFamily:"Inter",color:"#77716B",wordSpacing:"1.7px"}}>
+            {children}
+        </Text>
+    )
+}
 export function Header({children}:{children: React.ReactNode}){
     return(
     <Text weight={"regular"} size={"8"} style={{fontFamily:"Lora",wordSpacing:"-1.5px",color:"#282420"}}>
