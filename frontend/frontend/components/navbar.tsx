@@ -64,7 +64,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             }}>
             <div style={{display:"flex",flexDirection:"row",width:"100%",
                 height:"fit-content",alignItems:"center"
-                ,gap:"10px",borderBottom:"black solid 1px"
+                ,gap:"10px",borderBottom:"#6B5E56 solid 1px"
                 }}>
             
             <div style={{width:"100%",justifyContent:"right",padding:"15px",borderRadius:"10px",display:"flex"}}>        
@@ -83,14 +83,14 @@ export default function Navbar({children}:{children: React.ReactNode;}){
   overflowX:"hidden",}}>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/dashboard');setact(false);click('b1')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b1?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b1?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b1?"#742C38":"",width:"240px",height:"fit-content",
+                    backgroundColor:btn.b1?"#742C38":"#FFF9F0",width:"240px",height:"fit-content",
                     }}>
                     
-                    <LayoutDashboard color={btn.b1?"#FFFFFF":"black" }style={{marginRight:"10px"}}></LayoutDashboard>
+                    <LayoutDashboard color={btn.b1?"#FFF9F0":"#6B5E56" }style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b1?"#FFFFFF":"black" }}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b1?"#FFFFFF":"#6B5E56" }}>
                         Dashboard
                     </Text>
                 </button>
@@ -98,14 +98,14 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms');setact(false);click('b2')}}
                   style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b2?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b2?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b2?"#742C38":"",width:"240px",height:"fit-content"}}
+                    backgroundColor:btn.b2?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}
                     >
 
-                    <LayoutDashboard color={btn.b2?"#FFFFFF":"black" } style={{marginRight:"10px"}}></LayoutDashboard>
+                    <LayoutDashboard color={btn.b2?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b2?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b2?"#FFFFFF":"#6B5E56"}}>
                         Create Purchase
                     </Text>    
                         
@@ -114,15 +114,15 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/stock');setact(false);click('b3')}} 
                 style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b3?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b3?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b3?"#742C38":"",width:"240px",height:"fit-content"}}
+                    backgroundColor:btn.b3?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}
                 
                 >
                     
-                    <LayoutDashboard color={btn.b3?"#FFFFFF":"black" }style={{marginRight:"10px"}}></LayoutDashboard>
+                    <LayoutDashboard color={btn.b3?"#FFFFFF":"#6B5E56" }style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b3?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b3?"#FFFFFF":"#6B5E56"}}>
                         Create Stock
                     </Text>  
                 
@@ -130,25 +130,25 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             </div>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/stock/fetch');setact(false);click('b4')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b4?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b4?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b4?"#742C38":"",width:"240px",height:"fit-content"}}>
+                    backgroundColor:btn.b4?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                         
-                        <LayoutDashboard color={btn.b4?"#FFFFFF":"black"} style={{marginRight:"10px"}}></LayoutDashboard>
+                        <LayoutDashboard color={btn.b4?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b4?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b4?"#FFFFFF":"#6B5E56"}}>
                         Fetch Stock
                     </Text>  
                         </button>
             </div>
              <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/expenses');setact(false);click('b5')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b5?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b5?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b5?"#742C38":"",width:"240px",height:"fit-content"}}>
-                            <LayoutDashboard color={btn.b5?"#FFFFFF":"black"} style={{marginRight:"10px"}}></LayoutDashboard>
+                    backgroundColor:btn.b5?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
+                            <LayoutDashboard color={btn.b5?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b5?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b5?"#FFFFFF":"#6B5E56"}}>
                         Create Expense
                     </Text>  
                         
@@ -156,38 +156,38 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             </div>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/expenses/fetch');setact(false);click('b6')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b6?"none":"black solid 1px",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b6?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b6?"#742C38":"",width:"240px",height:"fit-content"}}>
-                            <LayoutDashboard color={btn.b6?"#FFFFFF":"black"} style={{marginRight:"10px"}}></LayoutDashboard>
+                    backgroundColor:btn.b6?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
+                            <LayoutDashboard color={btn.b6?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b6?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b6?"#FFFFFF":"#6B5E56"}}>
                        Fetch Expense
                     </Text>  
                         </button>
             </div>
              <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/sales');setact(false);click('b7')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b7?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b7?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b7?"#742C38":"",width:"240px",height:"fit-content"}}>
+                    backgroundColor:btn.b7?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                         
-                        <LayoutDashboard color={btn.b7?"#FFFFFF":"black"} style={{marginRight:"10px"}}></LayoutDashboard>
+                        <LayoutDashboard color={btn.b7?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b7?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b7?"#FFFFFF":"#6B5E56"}}>
                        Create Sales
                     </Text>
                        </button>
             </div>
              <div style={{width:"100%",height:"100%",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/sales/fetch');setact(false);click('b8')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b8?"none":"solid 1px black",
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b8?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b8?"#742C38":"",width:"240px",height:"fit-content"}}>
+                    backgroundColor:btn.b8?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                     
-                    <LayoutDashboard color={btn.b8?"#FFFFFF":"black"} style={{marginRight:"10px"}}></LayoutDashboard>
+                    <LayoutDashboard color={btn.b8?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
                     
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b8?"#FFFFFF":"black"}}>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b8?"#FFFFFF":"#6B5E56"}}>
                        Fetch Sales
                     </Text></button>
             </div>
@@ -196,9 +196,10 @@ export default function Navbar({children}:{children: React.ReactNode;}){
             
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={logout} type="button" style={{
-                    cursor:"pointer",width:"240px",borderRadius:"5px",backgroundColor:"#4e1703",padding:"3px",display:"flex",flexDirection:"row",justifyContent:"left",alignItems:"center"}}>
-                    <LogOut color="#FFFFFF"  style={{marginRight:"10px"}}></LogOut>
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:"#FFFFFF"}}>
+                    border:"1px solid #D6C9C0",
+                    cursor:"pointer",width:"240px",borderRadius:"5px",backgroundColor:"#FFF9F0",padding:"3px",display:"flex",flexDirection:"row",justifyContent:"left",alignItems:"center"}}>
+                    <LogOut color="#742C38"  style={{marginRight:"10px"}}></LogOut>
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:"#742C38"}}>
                        Logout
                     </Text>
                 </button>
