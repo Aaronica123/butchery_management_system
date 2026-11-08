@@ -31,8 +31,8 @@ export default function Submit(){
         <>
         <div style={{width:"100%",display:"flex",flexDirection:"column",gap:"10px"}}>
         <div style={{width:"100%",display:"flex",flexDirection:"column"}}>
-            <Header>Create Stock</Header>
-            <Child_text>Create Your Stock Today</Child_text>
+            <Header>Create Sales</Header>
+            <Child_text>Create Your Sales Today</Child_text>
         </div>
             <Card size={"2"} style={{width:"560px",display:"flex",flexDirection:"column",gap:"15px"}}>
                 <div style={{width:'100%',display:"flex",flexDirection:'column',gap:"5px"}}>
