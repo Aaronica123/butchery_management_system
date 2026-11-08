@@ -3,13 +3,16 @@
 import { useState } from "react";
 import {val} from "@/components/supabase";
 import Link from "next/link";
-import { Button, Card, TextField } from "@radix-ui/themes";
-import Head_text, { Input, Label } from "@/components/text";
+import { Button, Card, Spinner, TextField } from "@radix-ui/themes";
+import Head_text, { Child_text1, Input, Label } from "@/components/text";
 import { Child_text } from "@/components/text";
 import { Header } from "@/components/text";
-import { ArrowLeft, ArrowRight, Eye } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bell, Eye, SquareExclamationPoint } from "lucide-react";
 import { Text } from "@radix-ui/themes";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 export default function Home() {
+  const [load,setload]=useState(false);
   const [value,setvalue]=useState({email:"",password:""});
   const change=(e:React.ChangeEvent<HTMLInputElement>)=>{
     const{name,value}=e.target;
@@ -18,13 +21,39 @@ export default function Home() {
       [name]:value
     }))
   }
+  const route=useRouter()
   const submit=async()=>{
+    setload(true)
     const {data,error}=await val.auth.signInWithPassword({email:String(value.email).toLowerCase(),password:value.password});
     if(data.user){
-      alert("User was found");
+      setload(false)
+      // alert("User was found");
+       toast(
+  <div style={{display:"flex",flexDirection:"row",alignItems:"center", gap:"10px",}}>
+  <Bell color="#742C38"></Bell>       
+  <div style={{width:"fit-content",display:"flex",flexDirection:"column"}}>
+  Success Login
+  <Child_text1>User Authenticated</Child_text1>
+  </div>
+  </div>,{position:"top-right",action:{label:"Close",onClick:()=>{}},actionButtonStyle:{background:"#D6C9C0",color:"#742C38",},style:{background:"#FAF9F6",border:"1px solid #DEDAD4"}});
+ 
+       route.push("/pages/dashboard");
       return data.user;
     }
     if(error){
+      setload(false)
+      console.log("error is"+error.code)
+     if(error.code=="invalid_credentials"){
+      toast(
+        <div style={{display:"flex",flexDirection:"row",alignItems:"center",gap:"10px"}}>
+  <SquareExclamationPoint color="#742C38"></SquareExclamationPoint>        
+  <div style={{width:"fit-content",display:"flex",flexDirection:"column"}}>
+    Invalid Credentials
+    <Child_text>Please Check Email and Password</Child_text>
+  </div>
+  </div>,{position:"top-right",action:{label:"Close",onClick:()=>{}},actionButtonStyle:{background:"#D6C9C0",color:"#742C38",},style:{background:"#FAF9F6",border:"1px solid #DEDAD4"}});
+
+ }
       throw new Error(error.message);
     }
   }
@@ -62,12 +91,21 @@ export default function Home() {
   </div>
   {/* <input value={value.password} onChange={change} name="password" required type="password" placeholder="enter password"></input> */}
   <div style={{width:"100%",height:"fit-content",display:"flex"}}>
-    <button type="button" onClick={submit}  style={{padding:"5px",borderRadius:"8px",justifyContent:"center",alignItems:"center",cursor:"pointer",background:"#742C38",width:"100%"}}>
-      
+    <button type="button" onClick={submit}  style={{padding:"5px",border:load?"1px black solid":"none",borderRadius:"8px",justifyContent:"center",alignItems:"center",cursor:"pointer",background:load?"":"#742C38",width:"100%"}}>
+      {load?
+      <div style={{display:'flex',flexDirection:"row",justifyContent:"center",alignItems:"center", gap:"5px"}}>
+        <Spinner></Spinner>
+      <Text size={"3"} weight={"medium"} style={{fontFamily:"Inter",color:"black"}}>
+Signing In 
+
+      </Text>
+      </div>
+      :
       <Text size={"3"} weight={"medium"} style={{fontFamily:"Inter",color:"white"}}>
 Sign In
 
       </Text>
+      }
       
       
     </button>
