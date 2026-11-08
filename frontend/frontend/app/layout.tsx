@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@radix-ui/themes/styles.css";
+import "./global.css"
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body style={{ margin:0}}>
         <Theme style={{background:"#FAF9F6 10%"}}>
         {children}
+        <Toaster/>
         </Theme>
         </body>
     </html>
