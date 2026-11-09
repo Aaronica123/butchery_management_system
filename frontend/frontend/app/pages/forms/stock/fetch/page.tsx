@@ -1,5 +1,5 @@
 import { final_ax } from "@/components/axios";
-import Head_text, { Child_text1,Child_text } from "@/components/text";
+import Head_text, { Child_text1,Child_text,Header } from "@/components/text";
 import { Table, Text } from "@radix-ui/themes";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -21,7 +21,7 @@ const data=await final_ax.get("/main-branch/fetch");
 
 <div style={{width:"100%",height:"100%",display:"flex",flexDirection:"column",gap:"8px"}}>
 <div style={{width:"100%",height:"fit-content",display:"flex",flexDirection:"column",gap:"3px"}}>
-<Head_text>Fetch Stock</Head_text>
+<Header>Fetch Stock</Header>
 <Child_text>View butchery stock below</Child_text>
 </div>
 <div style={{width:"100%",height:"430px",display:"flex",flexDirection:"column"}}>

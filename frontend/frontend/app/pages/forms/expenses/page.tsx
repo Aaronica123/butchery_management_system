@@ -1,7 +1,7 @@
 "use client"
 
 import { final_ax } from "@/components/axios";
-import Head_text, { Child_text1, Label } from "@/components/text";
+import Head_text, { Child_text1, Label,Header } from "@/components/text";
 import { Card,TextField,Text } from "@radix-ui/themes";
 import { useState } from "react"
 
@@ -35,7 +35,7 @@ export default function Expense_form(){
     return(<>
     <div style={{width:"100%",gap:'3px',display:'flex',flexDirection:"column",height:"fit-content"}}>
         <div style={{width:"100%",display:'flex',flexDirection:"column",height:"fit-content"}}>
-            <Head_text>Create Expenses</Head_text>
+            <Header>Create Expenses</Header>
             <Child_text1>Use the form below to create expenses</Child_text1>
         </div>
         <Card size={"2"} style={{width:"560px",gap:"10px",display:"flex",flexDirection:"column"}}>

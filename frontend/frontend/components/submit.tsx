@@ -3,7 +3,7 @@
 import { Card,TextField,Text } from "@radix-ui/themes";
 import { final_ax } from "./axios";
 import { useState } from "react"
-import Head_text, { Child_text, Label } from "./text";
+import Head_text, { Child_text, Label,Header } from "./text";
 export default function Submit({row}:{row:[]}){
     const [form,setform]=useState({quantity:0})
     const [val,setvalue]=useState(row);
@@ -78,10 +78,10 @@ export default function Submit({row}:{row:[]}){
     return(<>
     <div style={{width:"100%",display:'flex',flexDirection:"column",height:"fit-content",gap:"10px"}}>
     <div style={{width:"100%",display:'flex',flexDirection:"column",height:"fit-content"}}>
-        <Head_text>Create Purchase</Head_text>
+        <Header>Create Purchase</Header>
         <Child_text>Create purchases for butchery system using form below</Child_text>
     </div>
-        <Card size={"2"} style={{width:"560px",gap:"5px",display:'flex',flexDirection:"column", gap:"8px"}}>
+        <Card size={"2"} style={{width:"560px",display:'flex',flexDirection:"column", gap:"8px"}}>
         <div style={{width:"100%",display:'flex',flexDirection:"row",height:"fit-content",gap:"5px"}}>
         <div style={{width:"100%",gap:"3px",display:'flex',flexDirection:"column",height:"fit-content"}}>
         <Label> Choose  Supplier</Label>    
