@@ -17,4 +17,8 @@ export class PurchaseController {
   fetch(){
    return this.purchaseService.fetch();
   }
+  @Get("/data_fetch")
+  data_fetch(){
+    return this.purchaseService.data_fetch();
+  }
 }
