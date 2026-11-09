@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { final_ax } from "@/components/axios";
 import { Card, Select, Theme,TextField,Text } from "@radix-ui/themes";
-import Head_text, { Child_text1,Child_text, Label } from "@/components/text";
+import Head_text, { Child_text1,Child_text, Label,Header } from "@/components/text";
 export default function Stock_form(){
     const [form,setform]=useState({wasted:0,received:0,sold:0,transfered:0})
     const[meat,setmeat]=useState({meat:""})
@@ -44,7 +44,7 @@ return(
 <div style={{width:"100%",display:'flex',flexDirection:"column",height:"fit-content",gap:"10px"}}>
 
 <div style={{width:"100%",display:'flex',flexDirection:"column",height:"fit-content",gap:"1px"}}>
-    <Head_text>Create Stock</Head_text>
+    <Header>Create Stock</Header>
     <Child_text>Create stock using the following form</Child_text>
 </div>
 <Card size={"2"} style={{width:"560px",display:'flex',flexDirection:"column", gap:"8px"}}>

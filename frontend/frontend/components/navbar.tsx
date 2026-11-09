@@ -11,7 +11,7 @@ import { Text } from "@radix-ui/themes";
 export default function Navbar({children}:{children: React.ReactNode;}){
     const[act,setact]=useState(false)
     const route=useRouter()
-    const [btn,setbtn]=useState({b1:true,b2:false,b3:false,b4:false,b5:false,b6:false,b7:false,b8:false})
+    const [btn,setbtn]=useState({b1:true,b2:false,b3:false,b4:false,b5:false,b6:false,b7:false,b8:false,b9:false})
 
     function click(m:string){
         const f=Object.keys(btn);
@@ -111,6 +111,24 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                         
                         </button>
             </div>
+
+            <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
+                <button onClick={()=>{route.push('/pages/forms/purchase_fetch');setact(false);click('b9')}}
+                  style={{
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b9?"none":"solid 1px #DEDAD4",
+                    justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
+                    backgroundColor:btn.b9?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}
+                    >
+
+                    <LayoutDashboard color={btn.b9?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></LayoutDashboard>
+                    
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b9?"#FFFFFF":"#6B5E56"}}>
+                        Fetch Purchase
+                    </Text>    
+                        
+                        </button>
+            </div>        
+
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms/stock');setact(false);click('b3')}} 
                 style={{
