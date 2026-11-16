@@ -1,18 +1,19 @@
 "use client"
-import { LayoutDashboard, LogOut, MoveLeftIcon, Sidebar, SidebarClose, SidebarOpen } from "lucide-react";
+import { LayoutDashboard, LogOut, MoveLeftIcon, Sidebar,SquareExclamationPoint, SidebarClose, SidebarOpen,Inspect,FilePlus,BadgeDollarSign, FileLineChart,LoaderIcon, Bell } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LayoutDashboardIcon } from "lucide-react";
 import { final_ax } from "./axios";
 import { val } from "./supabase";
 import Head_text from "./text";
-import { Text } from "@radix-ui/themes";
-
+import { Spinner, Text } from "@radix-ui/themes";
+import { toast } from "sonner";
+import { Child_text1 } from "./text";
 export default function Navbar({children}:{children: React.ReactNode;}){
     const[act,setact]=useState(false)
     const route=useRouter()
     const [btn,setbtn]=useState({b1:true,b2:false,b3:false,b4:false,b5:false,b6:false,b7:false,b8:false,b9:false,b10:false})
-
+    const [load,setload]=useState(false);
     function click(m:string){
         const f=Object.keys(btn);
         console.log(f)
@@ -37,13 +38,48 @@ export default function Navbar({children}:{children: React.ReactNode;}){
         return;
     }
     const logout=async()=>{
+        setload(true);
+        const id=toast(
+  <div style={{display:"flex",flexDirection:"row",alignItems:"center", gap:"10px",}}>
+  <LoaderIcon color="#742C38"></LoaderIcon>       
+  <div style={{width:"fit-content",display:"flex",flexDirection:"column"}}>
+  Logging Out
+  <Child_text1>Please wait while we log you out</Child_text1>
+  </div>
+  </div>,{position:"top-right",action:{label:"Close",onClick:()=>{}},actionButtonStyle:{background:"#D6C9C0",color:"#742C38",},style:{background:"#FAF9F6",border:"1px solid #DEDAD4"}});
+ 
         const{error}=await val.auth.signOut({scope:"local"});
         if(error){
-            alert("error encountered logout failed")
+            // alert("error encountered logout failed")
+            setload(false)
+            toast.dismiss(id)
+
+            toast(
+  <div style={{display:"flex",flexDirection:"row",alignItems:"center", gap:"10px",}}>
+  <SquareExclamationPoint color="#742C38"></SquareExclamationPoint>       
+  <div style={{width:"fit-content",display:"flex",flexDirection:"column"}}>
+  Logout Failed
+  <Child_text1>Could not logout try again later</Child_text1>
+  </div>
+  </div>,{position:"top-right",action:{label:"Close",onClick:()=>{}},actionButtonStyle:{background:"#D6C9C0",color:"#742C38",},style:{background:"#FAF9F6",border:"1px solid #DEDAD4"}});
+ 
+
             throw new Error("Could not log out")
+            
         }
         else{
-            alert("logout successfull");
+            setload(false)
+            toast(
+  <div style={{display:"flex",flexDirection:"row",alignItems:"center", gap:"10px",}}>
+    
+  <Bell color="#742C38"></Bell>       
+  <div style={{width:"fit-content",display:"flex",flexDirection:"column"}}>
+  Logout Success 
+  <Child_text1>You have been logged out successfully</Child_text1>
+  </div>
+  </div>,{position:"top-right",action:{label:"Close",onClick:()=>{}},actionButtonStyle:{background:"#D6C9C0",color:"#742C38",},style:{background:"#FAF9F6",border:"1px solid #DEDAD4"}});
+ 
+            // alert("logout successfull");
             route.push("/");
         }
 
@@ -95,6 +131,18 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     </Text>
                 </button>
             </div>
+            <div style={{width:"100%",height:"100%",display:"flex",padding:"10px"}}>
+                <button onClick={()=>{route.push('/pages/forms/analysis');setact(false);click('b10')}} style={{
+                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b10?"none":"solid 1px #DEDAD4",
+                    justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
+                    backgroundColor:btn.b10?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
+                    
+                    <Inspect color={btn.b10?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></Inspect>
+                    
+                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b10?"#FFFFFF":"#6B5E56"}}>
+                      View Analytics
+                    </Text></button>
+            </div>
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={()=>{route.push('/pages/forms');setact(false);click('b2')}}
                   style={{
@@ -103,7 +151,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     backgroundColor:btn.b2?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}
                     >
 
-                    <LayoutDashboard color={btn.b2?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></LayoutDashboard>
+                    <FilePlus color={btn.b2?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></FilePlus>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b2?"#FFFFFF":"#6B5E56"}}>
                         Create Purchase
@@ -120,7 +168,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     backgroundColor:btn.b9?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}
                     >
 
-                    <LayoutDashboard color={btn.b9?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></LayoutDashboard>
+                    <FileLineChart color={btn.b9?"#FFFFFF":"#6B5E56" } style={{marginRight:"10px"}}></FileLineChart>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b9?"#FFFFFF":"#6B5E56"}}>
                         Fetch Purchase
@@ -138,7 +186,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                 
                 >
                     
-                    <LayoutDashboard color={btn.b3?"#FFFFFF":"#6B5E56" }style={{marginRight:"10px"}}></LayoutDashboard>
+                    <FilePlus color={btn.b3?"#FFFFFF":"#6B5E56" }style={{marginRight:"10px"}}></FilePlus>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b3?"#FFFFFF":"#6B5E56"}}>
                         Create Stock
@@ -152,7 +200,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
                     backgroundColor:btn.b4?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                         
-                        <LayoutDashboard color={btn.b4?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
+                        <FileLineChart color={btn.b4?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></FileLineChart>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b4?"#FFFFFF":"#6B5E56"}}>
                         Fetch Stock
@@ -164,7 +212,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b5?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
                     backgroundColor:btn.b5?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
-                            <LayoutDashboard color={btn.b5?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
+                            <FilePlus color={btn.b5?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></FilePlus>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b5?"#FFFFFF":"#6B5E56"}}>
                         Create Expense
@@ -177,7 +225,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b6?"none":"solid 1px #DEDAD4",
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
                     backgroundColor:btn.b6?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
-                            <LayoutDashboard color={btn.b6?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
+                            <FileLineChart color={btn.b6?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></FileLineChart>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b6?"#FFFFFF":"#6B5E56"}}>
                        Fetch Expense
@@ -190,7 +238,7 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
                     backgroundColor:btn.b7?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                         
-                        <LayoutDashboard color={btn.b7?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
+                        <FilePlus color={btn.b7?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></FilePlus>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b7?"#FFFFFF":"#6B5E56"}}>
                        Create Sales
@@ -203,35 +251,33 @@ export default function Navbar({children}:{children: React.ReactNode;}){
                     justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
                     backgroundColor:btn.b8?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
                     
-                    <LayoutDashboard color={btn.b8?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
+                    <FileLineChart color={btn.b8?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></FileLineChart>
                     
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b8?"#FFFFFF":"#6B5E56"}}>
                        Fetch Sales
                     </Text></button>
             </div>
-            <div style={{width:"100%",height:"100%",display:"flex",padding:"10px"}}>
-                <button onClick={()=>{route.push('/pages/forms/analysis');setact(false);click('b10')}} style={{
-                    cursor:"pointer",padding:"6px",borderRadius:"5px",gap:"5px",border:btn.b10?"none":"solid 1px #DEDAD4",
-                    justifyContent:"left",display:"flex",flexDirection:"row",alignItems:"center",
-                    backgroundColor:btn.b10?"#742C38":"#FFF9F0",width:"240px",height:"fit-content"}}>
-                    
-                    <LayoutDashboard color={btn.b10?"#FFFFFF":"#6B5E56"} style={{marginRight:"10px"}}></LayoutDashboard>
-                    
-                    <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:btn.b10?"#FFFFFF":"#6B5E56"}}>
-                      View Analytics
-                    </Text></button>
-            </div>
+            
             
             </div>
             
             <div style={{width:"100%",height:"fit-content",display:"flex",padding:"10px"}}>
                 <button onClick={logout} type="button" style={{
-                    border:"1px solid #D6C9C0",
-                    cursor:"pointer",width:"240px",borderRadius:"5px",backgroundColor:"#FFF9F0",padding:"3px",display:"flex",flexDirection:"row",justifyContent:"left",alignItems:"center"}}>
+                    border:load?"1px black solid":"1px solid #D6C9C0",
+                    cursor:"pointer",width:"240px",borderRadius:"5px",backgroundColor:load?"whitesmoke":"#FFF9F0",padding:"3px",display:"flex",flexDirection:"row",justifyContent:"left",alignItems:"center"}}>
+                    {load?<div style={{display:'flex',flexDirection:"row",justifyContent:"center",alignItems:"center", gap:"5px"}}>
+        <Spinner></Spinner>
+      <Text size={"3"} weight={"medium"} style={{fontFamily:"Inter",color:"black"}}>
+Logging Out
+
+      </Text>
+      </div>:<div style={{display:'flex',flexDirection:"row", gap:"5px"}}>
                     <LogOut color="#742C38"  style={{marginRight:"10px"}}></LogOut>
                     <Text size={"4"} weight={"medium"} style={{fontFamily:"Inter",color:"#742C38"}}>
                        Logout
                     </Text>
+                    </div>
+}
                 </button>
                 
             </div>
