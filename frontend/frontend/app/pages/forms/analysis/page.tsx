@@ -14,13 +14,16 @@ export default function Render(){
 
 async function Fetc(){
     await connection();
-    const da=await val.schema("butchery_schema").from("sales").select("created,total");
+    const da=await val.schema("butchery_schema").from("sales").select("created,total").order("created",{ascending:true});
         console.log("da is ")
         console.log(da)
+    const dp=await val.schema("butchery_schema").from("expenses").select("created,total").order("created",{ascending:true});
+        console.log("d1 is ")
+        console.log(dp)    
     return(
         <>
         
-            <Fetch row={da?.data}></Fetch>
+            <Fetch d1={dp?.data} row={da?.data}></Fetch>
         
         </>
     )
