@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react"
 import { final_ax } from "@/components/axios";
-import { Card, Select, Theme,TextField,Text } from "@radix-ui/themes";
+import { Card, Select, Theme,TextField,Text,Spinner } from "@radix-ui/themes";
 import Head_text, { Child_text1,Child_text, Label,Header } from "@/components/text";
 export default function Stock_form(){
     const [form,setform]=useState({wasted:0,received:0,sold:0,transfered:0})
     const[meat,setmeat]=useState({meat:""})
+    const[load,setload]=useState(false)
     const change=(e:React.ChangeEvent<HTMLInputElement>)=>{
         const{name,value}=e.target;
         setform((data)=>({
@@ -21,6 +22,9 @@ export default function Stock_form(){
         }))
     }
     const submit=async()=>{
+        try {
+            setload(true)
+        
         console.log(form)
         const data=await final_ax.post("/main-branch/create",{
             transfered:Number(form.transfered),
@@ -29,13 +33,25 @@ export default function Stock_form(){
             wasted:Number(form.wasted),
             meat:meat.meat
         })
+        console.log(data)
         if(data.status==200||data.status==201){
             alert("Created stock successfully")
+            setload(false)
             setform({wasted:0,received:0,sold:0,transfered:0})
             return;
         }
+
         else{
+            console.log("STatus is")
+            setload(false)
+            console.log(data.status)
             throw new Error(data.data);
+        }
+        } catch (error) {
+            setload(false)
+            console.log("error is "+error);
+            console.log(error)
+            alert("An error occured")
         }
     }
 return(
@@ -95,8 +111,17 @@ return(
 <div style={{width:"100%",display:"flex"}}>
     <button
     type="button" onClick={submit}
-    style={{width:"132px",padding:"5px",borderRadius:"5px",border:"1px solid black",cursor:"pointer",background:"#742C38"}}>
+    style={{width:"132px",padding:"5px",borderRadius:"5px",border:"1px solid black",cursor:"pointer",background:load?"none":"#742C38"}}>
+        {load?
+        <div style={{display:'flex',flexDirection:"row",justifyContent:"center",alignItems:"center", gap:"5px"}}>
+        <Spinner></Spinner>
+      <Text size={"3"} weight={"medium"} style={{fontFamily:"Inter",color:"black"}}>
+Submitting
+
+      </Text>
+      </div>:
         <Text style={{color:"white"}}>Submit</Text>
+}
     </button>
   </div>
 {/* <button onClick={submit} type="button">Submit</button> */}
