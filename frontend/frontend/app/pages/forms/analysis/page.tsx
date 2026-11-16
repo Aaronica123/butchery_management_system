@@ -20,7 +20,7 @@ async function Fetc(){
     return(
         <>
         
-            <Fetch>{da.data}</Fetch>
+            <Fetch row={da?.data}></Fetch>
         
         </>
     )

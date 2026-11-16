@@ -15,13 +15,16 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 type Row = { created: string; total: number };
-
-export function Fetch({ children }: { children: Row[] }) {
+const data={
+  created:"",
+  total:0
+}
+export function Fetch({ row }: { row: Row[]|null }) {
   return (
     <ChartContainer config={chartConfig} className="h-[200px] w-full">
       <AreaChart
         accessibilityLayer
-        data={children}
+        data={row?row:[data]}
         margin={{ left: 12, right: 12 }}
       >
         <CartesianGrid vertical={false} />
