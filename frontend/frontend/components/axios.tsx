@@ -1,7 +1,7 @@
 import axios from "axios"
 import { val } from "./supabase"
 const ax=axios.create({
-    baseURL:"/api",
+    baseURL:`${process.env.NEXT_PUBLIC_BACKEND_URL}/api`||"http://localhost:3001/api",
     headers:{
         "Content-Type":"application/json"
     },
