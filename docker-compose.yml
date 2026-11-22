@@ -11,9 +11,9 @@ services:
 
   backend:
     build:
-      context: ./frontend/frontend
+      context: ./backend/backend_prj
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: backend
     ports:
       - "3001:3001"
     environment:
